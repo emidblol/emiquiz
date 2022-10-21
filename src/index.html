@@ -12,15 +12,15 @@
 <body>
     <questions>
         <div id="question_1_div">
-            <h4>What is the year that never gonna give you up was released?</h4> <br>
+            <h4 id="q1">What is the year that never gonna give you up was released?</h4> <br>
             <input type="text" name="question 1" id="question_1" data-answer="1987">
         </div><br><br>
         <div id="question_2_div">
-            <h4>What do you call the instrument that helps planes land in no visibility??</h4>
+            <h4 id="q2">What do you call the instrument that helps planes land in no visibility??</h4>
             <input type="text" name="question 2" id="question_2" data-answer="ILS">
         </div><br><br>
         <div id="question_3_div">
-            <h4>What is the biggest discord server</h4>
+            <h4 id="q3">What is the biggest discord server</h4>
             <input type="text" name="question 3" id="question_3" data-answer="Midjourney">
         </div><br><br>
     </questions>
@@ -167,6 +167,7 @@
         var question3a = await question3_submit();
         //calculate score
         var score = 0;
+        var total_score = 3;
         if (question1a) {
             score++;
         }
@@ -176,7 +177,7 @@
         if (question3a) {
             score++;
         }
-        document.getElementById("score").innerHTML = "Score: " + score + "/3";
+        document.getElementById("score").innerHTML = "Score: " + score + "/" + total_score;
         //console log the cookies
         console.log(document.cookie);
     }
