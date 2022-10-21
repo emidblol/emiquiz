@@ -6,36 +6,13 @@ This is a example for a simple quiz
 3. Run `npm start`
 4. Open your browser and go to `http://localhost:3000`
 ## How to edit questions
-1. go to `src/index.html`
-2. In the `questions` element, follow the following structure and fill in between the brackets:
-```html
-<div id="question_(question number)_div">
-    <h4 id="q3">(question)</h4>
-    <input type="text" name="question (question number)" id="question_(question number)" data-answer="(answer of the question)">
-</div><br><br>
+1. Open the file `questions.json`
+2. Edit the questions in the questions array with the following format:
+```json 
+{"question": "(question)", "answer": "(answer)"}
 ```
-3. In the script tag, follow the following structure and fill in between the brackets:
-```js
-async function question(question_number)_submit() {
-        var question_(question_number) = document.getElementById("question_(question_number)");
-        question_(question_number).disabled = true;
-        //set the cookie 1 to the value of the question and remove the expiry date
-        document.cookie = "question_1=" + question_(question_number).value + "; expires=Thu, 01 Jan 3000 00:00:00 UTC; path=/;";
-        //check if the answer is correct
-        if (question_(question_number).value === question_(question_number).dataset.answer) {
-            question_(question_number).style.backgroundColor = "green";
-            question_(question_number).style.color = "white";
-            return true;
-        } else {
-            question_(question_number).style.backgroundColor = "red";
-            question_(question_number).style.color = "white";
-            return false;
-        }
-}
-```	
-4. Add the newly made functions to the submit_all function at the start
-5. In the html, edit the number in the score element to the amount of questions you have
-6. In the script tag and in the submit_all() function, edit the score_total variable to the amount of questions you have
+3. Save the file
+4. No need to restart the server, the questions will be reloaded automatically
 ## How to contribute
 1. Fork the repository
 2. Make your changes

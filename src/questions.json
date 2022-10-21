@@ -1,0 +1,16 @@
+{
+    "questions": [
+        {
+            "question": "What is the capital of France?",
+            "answer": "Paris"
+        },
+        {
+            "question": "When was never gonna give you up released?",
+            "answer": "1987"
+        },
+        {
+            "question": "What is the system for landing a plane called? (use the acronym)",
+            "answer": "ILS"
+        }
+    ]
+}
