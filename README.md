@@ -46,6 +46,7 @@ async function question(question_number)_submit() {
 ## Credits
 Here are all the packages used in this project:
 - [Vite](https://vitejs.dev/)
+
 And here are all the people who contributed to this project:
 - nobody yet
 ## Distribution
