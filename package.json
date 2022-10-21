@@ -1,7 +1,7 @@
 {
-  "name": "quiz",
-  "private": true,
-  "version": "0.0.0",
+  "name": "emiquiz",
+  "private": false,
+  "version": "v0.1.0",
   "scripts": {
     "dev": "vite",
     "start": "vite",
