@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="favicon" content="favicon.ico">
+    <title>Document</title>
+</head>
+
+<body>
+    <questions>
+        <div id="question_1_div">
+            <h4>What is the year that never gonna give you up was released?</h4> <br>
+            <input type="text" name="question 1" id="question_1" data-answer="1987">
+        </div><br><br>
+        <div id="question_2_div">
+            <h4>What do you call the instrument that helps planes land in no visibility??</h4>
+            <input type="text" name="question 2" id="question_2" data-answer="ILS">
+        </div><br><br>
+        <div id="question_3_div">
+            <h4>What is the biggest discord server</h4>
+            <input type="text" name="question 3" id="question_3" data-answer="Midjourney">
+        </div><br><br>
+    </questions>
+    <br>
+    <input type="button" value="Submit" onclick="submit_all()" id="submit" href="#">
+    <h2 id="score">Score: /2</h2>
+</body>
+
+</html>
+<style>
+    /*question 1*/
+    questions>div {
+        border: 2px solid black;
+        border-radius: 10px;
+        background-color: aqua;
+        /*center everything but accept new lines*/
+        text-align: center;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 20px;
+        width: 75%;
+        transition: all 1s;
+    }
+
+    questions>div:hover {
+        background-color: black;
+        color: white;
+    }
+
+    questions>div>input {
+        border: 2px solid black;
+        border-radius: 25px;
+        height: 30px;
+        transition: background-color 2s, color 2s;
+        padding: 12px 20px;
+    }
+    /*put the score in the top right corner*/
+    #score {
+        position: absolute;
+        top: 0;
+        right: 0;
+        /*add a border*/
+        border: 2px solid black;
+        border-radius: 10px;
+        background-color: aqua;
+        transition: all 1s;
+    }
+
+    #submit {
+        border: 2px solid black;
+        border-radius: 25px;
+        height: 30px;
+        transition: background-color 1s, color 1s;
+        padding: 12px 20px;
+        background-color: aqua;
+        /*center everything but accept new lines*/
+        text-align: center;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+        width: 75%;
+        padding-bottom: 40px;
+        /*make the button text nice looking and big*/
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 20px;
+    }
+
+    #submit:hover {
+        background-color: black;
+        color: white;
+    }
+</style>
+<script>
+    //check if the cookie exists
+    if (!document.cookie == "") {
+        //set the value of question_1 to the value of the question_1 cookie
+        document.getElementById("question_1").value = document.cookie.split(";")[0].split("=")[1];
+        //set the value of question_2 to the value of the question_2 cookie
+        document.getElementById("question_2").value = document.cookie.split(";")[1].split("=")[1];
+        //disable the inputs
+        document.getElementById("question_1").disabled = true;
+        document.getElementById("question_2").disabled = true;
+        //change the text of the submit button
+        document.getElementById("submit").value = "You have already submitted";
+        //disable the submit button
+        document.getElementById("submit").disabled = true;
+        //run submit_all
+        submit_all();
+    }
+    async function question1_submit() {
+        var question_1 = document.getElementById("question_1");
+        question_1.disabled = true;
+        //set the cookie 1 to the value of the question and remove the expiry date
+        document.cookie = "question_1=" + question_1.value + "; expires=Thu, 01 Jan 3000 00:00:00 UTC; path=/;";
+        //check if the answer is correct
+        if (question_1.value === question_1.dataset.answer) {
+            question_1.style.backgroundColor = "green";
+            question_1.style.color = "white";
+            return true;
+        } else {
+            question_1.style.backgroundColor = "red";
+            question_1.style.color = "white";
+            return false;
+        }
+    }
+    async function question2_submit() {
+        var question_2 = document.getElementById("question_2");
+        question_2.disabled = true;
+        //set the cookie 2 to the value of the question and remove the expire date
+        document.cookie = "question_2=" + question_2.value + "; expires=Thu, 01 Jan 3000 00:00:00 UTC;";
+        //check if the answer is correct
+        if (question_2.value === question_2.dataset.answer) {
+            question_2.style.backgroundColor = "green";
+            question_2.style.color = "white";
+            return true;
+        } else {
+            question_2.style.backgroundColor = "red";
+            question_2.style.color = "white";
+            return false;
+        }
+    }
+    async function question3_submit() {
+        var question_3 = document.getElementById("question_3");
+        question_3.disabled = true;
+        //set the cookie 3 to the value of the question and remove the expire date
+        document.cookie = "question_3=" + question_3.value + "; expires=Thu, 01 Jan 3000 00:00:00 UTC;";
+        //check if the answer is correct
+        if (question_3.value === question_3.dataset.answer) {
+            question_3.style.backgroundColor = "green";
+            question_3.style.color = "white";
+            return true;
+        } else {
+            question_3.style.backgroundColor = "red";
+            question_3.style.color = "white";
+            return false;
+        }
+    }
+    async function submit_all() {
+        var question1a = await question1_submit();
+        var question2a = await question2_submit();
+        var question3a = await question3_submit();
+        //calculate score
+        var score = 0;
+        if (question1a) {
+            score++;
+        }
+        if (question2a) {
+            score++;
+        }
+        if (question3a) {
+            score++;
+        }
+        document.getElementById("score").innerHTML = "Score: " + score + "/3";
+        //console log the cookies
+        console.log(document.cookie);
+    }
+</script>
