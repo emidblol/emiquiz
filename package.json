@@ -2,6 +2,7 @@
   "name": "emiquiz",
   "private": false,
   "version": "v1.1.0",
+  "license": "CC0-1.0",
   "scripts": {
     "dev": "vite",
     "start": "vite",
