@@ -29,4 +29,4 @@ And here are all the people who contributed to this project:
 ## Distribution
 You can freely distribute this project, but please give credit to the original author and do not claim it is yours.
 ## License
-This project is licensed under the creative commons license. You can find the license [here](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+This project is licensed under CC0 1.0, you can read the license [here](https://creativecommons.org/publicdomain/zero/1.0/) or in the `LICENSE.md` file.
