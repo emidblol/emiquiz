@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+</head>
+<body>
+    <!-- Add a button that resets all the cookies on every computer -->
+    <input type="button" value="Reset" onclick="reset_all()">
+    <script>
+        function reset_all() {
+            // Remove all cookies
+            document.cookie = "Submit=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        }
+    </script>
+</body>
+</html>
