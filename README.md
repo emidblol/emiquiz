@@ -9,7 +9,7 @@ This is a example for a simple quiz
 1. Open the file `questions.json`
 2. Edit the questions in the questions array with the following format:
 ```json 
-{"question": "(question)", "answer": "(answer)"}
+{"question": "(question)", "answer": ["(first correct answer)", "(you can add more by adding more strings in the array)"], "image": "(image url, change this to null if you don't want an image)", "score_share_webhook": "(A discord webhook url, change this to null if you don't want to share the score)"}
 ```
 3. Save the file
 4. No need to restart the server, the questions will be reloaded automatically

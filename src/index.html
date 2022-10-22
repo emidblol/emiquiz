@@ -12,7 +12,6 @@
 
 <body>
     <questions>
-
     </questions>
     <br>
     <input type="button" value="Submit" onclick="submit_all()" id="submit" href="#">
@@ -47,6 +46,11 @@
         height: 30px;
         transition: background-color 2s, color 2s;
         padding: 12px 20px;
+    }
+
+    questions>div>image {
+        border-radius: 25%;
+        border: 2px solid black;
     }
 
     /*put the score in the top right corner*/
@@ -97,48 +101,53 @@
         var score = document.getElementById("score");
         //set the score to 0
         score.innerHTML = "Score: 0/" + questions.length;
+        //set the answers list to an empty list
+        var answers = [];
         //for all the questions
         for (var i = 0; i < questions.length; i++) {
             //get the question
             var question = questions[i];
             question.disabled = true;
             //get the answer
-            var answer = question.dataset.answer.toLowerCase();
-            console.log(answer);
+            var answer = question.dataset.answer;
             //get the value of the question
             var value = question.value;
             //save the value to lower case
-            var value = value.toLowerCase();
+            var value = value;
             //save the answer to cookies
             document.cookie = "answer_" + i + "=" + value + ";SameSite=None;Secure";
-            //if the answer is correct
-            if (value == answer) {
-                //change the background color to green
-                question.style.backgroundColor = "green";
-                //change the text color to white
-                question.style.color = "white";
-                //get the score
-                var score = document.getElementById("score");
-                //get the score
-                var score_text = score.innerHTML;
-                //split the score
-                var score_split = score_text.split("/");
-                //get the score
-                var score_number = score_split[0];
-                //split the score
-                var score_number_split = score_number.split(":");
-                //get the score
-                var score_number_number = score_number_split[1];
+            //if the given value is in the answer array
+            if (answer.includes(value)) {
                 //add 1 to the score
-                score_number_number++;
-                //set the score
-                score.innerHTML = "Score: " + score_number_number + "/" + questions.length;
-            } else {
-                //change the background color to red
-                question.style.backgroundColor = "red";
-                //change the text color to white
+                score.innerHTML = "Score: " + (parseInt(score.innerHTML.split(":")[1].split("/")[0]) + 1) + "/" + questions.length;
+                //make the question green
+                question.style.backgroundColor = "green";
                 question.style.color = "white";
+                question.disabled = true;
+            } else {
+                //make the question red
+                question.style.backgroundColor = "red";
+                question.style.color = "white";
+                question.disabled = true;
             }
+            answers.push("Question " + i + ":" + value + '\n');
+        }
+        document.getElementById("submit").disabled = true;
+        document.getElementById("submit").style.backgroundColor = "grey";
+        document.getElementById("submit").style.color = "black";
+        document.cookie = "Submit=true;SameSite=None;Secure";
+        var request = new XMLHttpRequest();
+        request.open("GET", "questions.json", false);
+        request.send(null)
+        var my_JSON_object = JSON.parse(request.responseText);
+        if (my_JSON_object.score_share_webhook != null) {
+            var request = new XMLHttpRequest();
+            request.open("POST", my_JSON_object.score_share_webhook);
+            request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            var data = {
+                "content": "Score: `" + score.innerHTML.split(":")[1].split("/")[0] + "/" + questions.length + "`\nAnswers: ```" + answers.join(``) + "```" + "Name: `" + prompt("Enter your name") + "`"
+            }
+            request.send(JSON.stringify(data));
         }
     }
 
@@ -152,15 +161,23 @@
         var questions = json.questions
         var html = '';
         var question_count = 0;
+        var link_image = [];
         for (var i = 0; i < questions.length; i++) {
-            html += `<div id="question_${i}_div">
-        <h4 id="${i}">${questions[i].question}</h4>
-        <input type="text" name="question ${i}" id="question_${i}" data-answer="${questions[i].answer}">
-    </div><br><br>`
+            if (questions[i].image != null) {
+                html += '<div><img src="' + questions[i].image + '"><br><h4>' + questions[i].question + '</h4><input type="text" data-answer="' + questions[i].answer + '"><br></div><br><br>';
+                link_image.push(questions[i].image);
+            } else {
+                html += '<div><h4>' + questions[1].question + '</h4><input type="text" data-answer="' + questions[i].answer + '"><br></div><br><br>';
+            }
             question_count++;
         }
         document.querySelector("questions").innerHTML = html;
         document.getElementById("score").innerHTML = "Score: /" + question_count;
+        /*if (document.cookie.includes("Submit=true")) {
+            document.getElementById("submit").disabled = true;
+            document.getElementById("submit").style.backgroundColor = "grey";
+            document.getElementById("submit").style.color = "black";
+        }*/
     }
     readQuestions();
 </script>
